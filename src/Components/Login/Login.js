@@ -1,17 +1,37 @@
 import styled from "styled-components";
 import logo from "../../Assets/logo.png";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import UserContext from "../Contexts/UserContext";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const context = useContext(UserContext);
 
     function handleForm(e) {
         e.preventDefault();
-        console.log('AAAAAA');
+        const body = {
+            email,
+            password
+        }
+
+        const post = axios.post(context.postLogin, body);
+
+        post.then((answer) => {
+            context.setUserInfo(answer.data);
+            console.log(answer.data);
+            navigate('/homepage');
+        });
+
+        post.catch((error) => {
+            console.log(error);
+            alert('E-mail ou senha não encontrado(s)');
+        });
+
     }
 
     return (
