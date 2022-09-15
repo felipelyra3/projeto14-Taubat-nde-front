@@ -24,7 +24,7 @@ export default function Login() {
         post.then((answer) => {
             context.setUserInfo(answer.data);
             console.log(answer.data);
-            navigate('/latex');
+            navigate('/homepage');
             //navigate('/homepage');
         });
 
