@@ -3,16 +3,18 @@ import twitter from "../../Assets/twitter.png"
 import facebook from "../../Assets/facebook.png"
 import instagram from "../../Assets/instagram.png"
 import styled from "styled-components"
+import { useNavigate } from "react-router-dom"
 
 export default function(){
+    const navigate = useNavigate()
     return(
         <FooterStyle>
             <img src={logo}/>
             <p>© 2022 Copyright - TaubateStore </p>
             <div className="redes">
-                <img src={twitter}/>
-                <img src={facebook}/>
-                <img src={instagram }/>
+                <a target="_blank" href="https://www.twitter.com"><img src={twitter}/></a>
+                <a target="_blank" href="https://www.facebook.com"><img src={facebook}/></a>
+                <a target="_blank" href="https://www.instagram.com"><img src={instagram }/></a>
             </div>
         </FooterStyle>
     )
@@ -44,6 +46,7 @@ const FooterStyle = styled.div`
         justify-content: space-between;
         align-items: center;
         gap: 25px;
+        margin-top: 5px;
         cursor: pointer;
     }
 

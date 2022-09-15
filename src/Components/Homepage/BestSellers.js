@@ -16,8 +16,9 @@ export default function BestSellers(){
                      Authorization: `Bearer ${localStorage.getItem("token")}`
                  }
              })
-            
-             setBestSellers(request.data)
+             console.log(request.data.registros)
+             localStorage.setItem("avatar", request.data.usuario.avatar)
+             setBestSellers(request.data.registros)
          } catch (error) {
              console.log(error)
          }

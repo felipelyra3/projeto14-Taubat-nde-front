@@ -10,7 +10,7 @@ export default function Configuser() {
     const [senha, setSenha] = useState("")
     const [nome, setNome] = useState("")
     const [avatar, setAvatar] = useState("")
-
+    const img_user = localStorage.getItem("avatar")
 
     let navigate = useNavigate()
 
@@ -37,18 +37,19 @@ export default function Configuser() {
     return(
         <>
             <Header />
-            <ConfiguserStyled>
+            <ConfiguserStyled img_user={img_user}>
                 <form onSubmit={fazerCadastro}>
-                <h1>Edite Suas informações de usuário</h1>
-                    <input required type="email" id="campoEmail" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} /><br/>
-                    
-                    <input required type="number" id="camposenha" placeholder="senha" value={senha} onChange={e => setSenha(e.target.value)} /><br/>
-                    
-                    <input required type="text" id="campoNome" placeholder="nome" value={nome} onChange={e => setNome(e.target.value)} /><br/>
-                    
-                    <input required type="text" id="campoavatar" placeholder="Avatar" value={avatar} onChange={e => setAvatar(e.target.value)} /><br/>
+                  
+                  <div className="img"><img src={img_user}/></div>
+                  <input required type="email" id="campoEmail" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} /><br/>
+                  
+                  <input required type="number" id="camposenha" placeholder="senha" value={senha} onChange={e => setSenha(e.target.value)} /><br/>
+                  
+                  <input required type="text" id="campoNome" placeholder="nome" value={nome} onChange={e => setNome(e.target.value)} /><br/>
+                  
+                  <input required type="text" id="campoavatar" placeholder="Avatar" value={avatar} onChange={e => setAvatar(e.target.value)} /><br/>
 
-                    <button>Atualizar</button>
+                  <button>Atualizar</button>
                 </form>
             </ConfiguserStyled>
         </>
@@ -62,18 +63,23 @@ const ConfiguserStyled = styled.div`
   align-items: center;
   background: #f706b6;
   height: 100vh;
-  
-  h1{
-    text-align: center;
-    font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 32px;
-    line-height: 50px;
-    margin-bottom: 24px;
-    color: #FFFFFF;
+ 
+  .img {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 40px 0 20px 0;
+    background-color: red;
   }
 
+  .img img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    object-fit: fill;
+  }
+  
   form {
     display: flex;
     justify-content: center;

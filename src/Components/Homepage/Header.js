@@ -2,10 +2,11 @@ import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import logo from "../../Assets/logo.png"
 import sacola from "../../Assets/sacola.png"
-import usuarioicon from "../../Assets/usuario-icon.png"
+//import usuarioicon from "../../Assets/usuario-icon.png"
 
 export default function(){
     let navigate = useNavigate()
+    const usuarioicon = localStorage.getItem("avatar")
     return(
         <HeaderStyled>
             <div className="logo">
@@ -21,7 +22,7 @@ export default function(){
             </div>
             <div className="area_usuario">
                 <img src={sacola} />
-                <img onClick={()=> {navigate("/configuser")}} src={usuarioicon} />
+                <div className="iconuser"><img onClick={()=> {navigate("/configuser")}} src={usuarioicon} /></div>
             </div>
         </HeaderStyled>
     )
@@ -44,7 +45,6 @@ const HeaderStyled = styled.div`
     }
 
     .links ul {
-        color: white;
         font-size: 20px;
         width: 100%;
         display:flex;
@@ -60,6 +60,8 @@ const HeaderStyled = styled.div`
 
     .area_usuario {
         display: flex;
+        justify-content: center;
+        align-items: center;
         gap: 30px;
     }
     .area_usuario img {
@@ -67,4 +69,19 @@ const HeaderStyled = styled.div`
         height: 32px;
         cursor: pointer;
     }
+
+    .iconuser {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: red;
+  }
+
+  .iconuser img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    object-fit: fill;
+  }
 `
