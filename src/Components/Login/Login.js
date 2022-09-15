@@ -26,11 +26,13 @@ export default function Login() {
             console.log(answer.data);
             localStorage.setItem("token", answer.data)
             navigate('/homepage');
+            //navigate('/homepage');
         });
 
         post.catch((error) => {
             console.log(error);
-            alert('E-mail ou senha não encontrado(s)');
+            setError('E-mail ou senha não encontrado(s)');
+            //alert('E-mail ou senha não encontrado(s)');
         });
 
     }
