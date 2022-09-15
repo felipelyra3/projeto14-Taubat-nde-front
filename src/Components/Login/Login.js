@@ -24,12 +24,14 @@ export default function Login() {
         post.then((answer) => {
             context.setUserInfo(answer.data);
             console.log(answer.data);
-            navigate('/homepage');
+            navigate('/latex');
+            //navigate('/homepage');
         });
 
         post.catch((error) => {
             console.log(error);
-            alert('E-mail ou senha não encontrado(s)');
+            setError('E-mail ou senha não encontrado(s)');
+            //alert('E-mail ou senha não encontrado(s)');
         });
 
     }

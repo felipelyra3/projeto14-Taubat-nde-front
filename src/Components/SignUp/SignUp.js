@@ -37,8 +37,8 @@ export default function SignUp() {
         });
 
         post.catch((error) => {
-            alert('Erro! Tente novamente');
             console.log(error);
+            setError('Erro! Tente novamente');
         });
 
     }
