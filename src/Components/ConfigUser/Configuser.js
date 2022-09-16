@@ -3,6 +3,7 @@ import Header from "../Homepage/Header"
 import { useState } from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import Footer from "../Homepage/Footer"
 
 export default function Configuser() {
 
@@ -19,16 +20,30 @@ export default function Configuser() {
     event.preventDefault();
 
     try {
-      const requisicao = await axios.put("http://localhost:5000/", {
+      await axios.put("http://localhost:5000/configuser",
+      {
         email: email,
-        nome: nome,
-        senha: senha
+        avatar: avatar,
+        name: nome,
+        password: senha
+      },
+      {
+          headers: {
+              authorization: `Bearer ${localStorage.getItem("token")}`
+          }
       });
-      console.log(requisicao)
-      //navigate("/")
+      setEmail("")
+      setAvatar("")
+      setNome("")
+      setSenha("")
+      alert("Seus dados foram salvos com sucesso!")
 
     } catch {
-      console.log("deu ruim na requisição")
+      alert("Seus dados não puderam ser salvos tente novamente mais tarde!")
+      setEmail("")
+      setAvatar("")
+      setNome("")
+      setSenha("")
       return
     }
   }
@@ -41,17 +56,18 @@ export default function Configuser() {
         <form onSubmit={fazerCadastro}>
 
           <div className="img"><img src={img_user} /></div>
-          <input required type="email" id="campoEmail" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} /><br />
+          <input type="email" id="campoEmail" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} /><br />
 
-          <input required type="number" id="camposenha" placeholder="senha" value={senha} onChange={e => setSenha(e.target.value)} /><br />
+          <input type="number" id="camposenha" placeholder="senha" value={senha} onChange={e => setSenha(e.target.value)} /><br />
 
-          <input required type="text" id="campoNome" placeholder="nome" value={nome} onChange={e => setNome(e.target.value)} /><br />
+          <input type="text" id="campoNome" placeholder="nome" value={nome} onChange={e => setNome(e.target.value)} /><br />
 
-          <input required type="text" id="campoavatar" placeholder="Avatar" value={avatar} onChange={e => setAvatar(e.target.value)} /><br />
+          <input type="text" id="campoavatar" placeholder="Avatar" value={avatar} onChange={e => setAvatar(e.target.value)} /><br />
 
           <button>Atualizar</button>
         </form>
       </ConfiguserStyled>
+      <Footer/>
     </>
   )
 }
@@ -93,7 +109,7 @@ const ConfiguserStyled = styled.div`
     border: none;
     outline: none;
     margin-bottom: 13px;
-    font-family: 'Raleway';
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 17px;
@@ -112,7 +128,7 @@ const ConfiguserStyled = styled.div`
         outline: none;
         border: none;
         padding-left:15px;
-        font-family: 'Raleway';
+        font-family: 'Roboto', sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 18px;
