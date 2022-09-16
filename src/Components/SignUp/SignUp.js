@@ -20,7 +20,6 @@ export default function SignUp() {
         if (avatar === "") {
             setAvatar('https://www.pikpng.com/pngl/m/16-168770_user-iconset-no-profile-picture-icon-circle-clipart.png');
         }
-
         const body = {
             name,
             avatar,
