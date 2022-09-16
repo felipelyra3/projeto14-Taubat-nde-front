@@ -5,16 +5,16 @@ import instagram from "../../Assets/instagram.png"
 import styled from "styled-components"
 import { useNavigate } from "react-router-dom"
 
-export default function(){
+export default function Footer() {
     const navigate = useNavigate()
-    return(
+    return (
         <FooterStyle>
-            <img src={logo}/>
+            <img src={logo} />
             <p>© 2022 Copyright - TaubateStore </p>
             <div className="redes">
-                <a target="_blank" href="https://www.twitter.com"><img src={twitter}/></a>
-                <a target="_blank" href="https://www.facebook.com"><img src={facebook}/></a>
-                <a target="_blank" href="https://www.instagram.com"><img src={instagram }/></a>
+                <a target="_blank" href="https://www.twitter.com"><img src={twitter} /></a>
+                <a target="_blank" href="https://www.facebook.com"><img src={facebook} /></a>
+                <a target="_blank" href="https://www.instagram.com"><img src={instagram} /></a>
             </div>
         </FooterStyle>
     )
@@ -50,6 +50,5 @@ const FooterStyle = styled.div`
         cursor: pointer;
     }
 
-`   
+`
 
-    

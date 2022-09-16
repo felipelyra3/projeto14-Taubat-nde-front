@@ -3,8 +3,10 @@ import axios from "axios";
 import { useState, useContext, useEffect } from "react";
 import UserContext from "../Contexts/UserContext";
 import { useNavigate } from "react-router-dom";
+import Header from "../Homepage/Header";
+import Footer from "../Homepage/Footer";
 
-function ProductsJSX({ name, description, image, price, id, token, navigate, postAddCart }) {
+function ProductsJSX({ name, description, image, price, id, navigate, postAddCart }) {
     return (
         <Product>
             <div className="image"><img src={image} alt="Fabric" /></div>
@@ -12,13 +14,14 @@ function ProductsJSX({ name, description, image, price, id, token, navigate, pos
                 <h1>{name}</h1>
                 <h2>{description}</h2>
                 <h3>{price}</h3>
-                <h4 onClick={() => AddCart(id, token, navigate, postAddCart)}>Adicionar ao carrinho</h4>
+                <h4 onClick={() => AddCart(id, navigate, postAddCart)}>Adicionar ao carrinho</h4>
             </div>
         </Product>
     );
 }
 
-function AddCart(id, token, navigate, postAddCart) {
+function AddCart(id, navigate, postAddCart) {
+    const token = localStorage.getItem("token");
     if (Object.keys(token).length === 0) {
         navigate('/');
     } else {
@@ -33,7 +36,8 @@ function AddCart(id, token, navigate, postAddCart) {
         };
 
         const post = axios.post(postAddCart, body, config);
-        post.then(() => {
+        post.then((answer) => {
+            console.log(answer.data)
             alert('Produto adicionado no carrinho com sucesso');
         });
 
@@ -72,19 +76,24 @@ export default function Fabric() {
     }
 
     return (
-        <Page>
-            <ContainerProducts>
+        <>
+            <Page>
+                <Header />
+                <ContainerProducts>
 
-                {fabricProducts.map((product, key) => <ProductsJSX key={key} name={product.name} description={product.description} image={product.image} price={product.price} id={product._id} token={context.userInfo} navigate={navigate} postAddCart={context.postAddCart} />)}
+                    {fabricProducts.map((product, key) => <ProductsJSX key={key} name={product.name} description={product.description} image={product.image} price={product.price} id={product._id} navigate={navigate} postAddCart={context.postAddCart} />)}
 
-            </ContainerProducts>
-        </Page>
+                </ContainerProducts>
+            </Page>
+            <Footer />
+        </>
     );
 };
 
 const Page = styled.div`
     display: flex;
     justify-content: center;
+    margin-top: 100px;
 `;
 
 const ContainerProducts = styled.div`

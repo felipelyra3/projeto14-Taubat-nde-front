@@ -1,28 +1,28 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom";
 import styled from "styled-components"
 import logo from "../../Assets/logo.png"
 import sacola from "../../Assets/sacola.png"
 //import usuarioicon from "../../Assets/usuario-icon.png"
 
-export default function(){
+export default function Header() {
     let navigate = useNavigate()
     const usuarioicon = localStorage.getItem("avatar")
-    return(
+    return (
         <HeaderStyled>
             <div className="logo">
-                <img onClick={() => {navigate("/homepage")}} src={logo}/>
+                <img onClick={() => { navigate("/homepage") }} src={logo} alt="Taubatende" />
             </div>
             <div className="links">
                 <ul>
-                    <li>Pano</li>
-                    <li>Latex</li>
-                    <li>Plástico</li>
-                    <li>Gel</li>
+                    <Link to={'/fabric'}><li>Pano</li></Link>
+                    <Link to={'/latex'}><li>Latex</li></Link>
+                    <Link to={'/plastic'}><li>Plástico</li></Link>
+                    <Link to={'/gel'}><li>Gel</li></Link>
                 </ul>
             </div>
             <div className="area_usuario">
-                <img src={sacola} />
-                <div className="iconuser"><img onClick={()=> {navigate("/configuser")}} src={usuarioicon} /></div>
+                <Link to={'/cart'}><img src={sacola} alt="Cart" /></Link>
+                <div className="iconuser"><img onClick={() => { navigate("/configuser") }} src={usuarioicon} alt="Taubatende" /></div>
             </div>
         </HeaderStyled>
     )
@@ -75,7 +75,6 @@ const HeaderStyled = styled.div`
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: red;
   }
 
   .iconuser img {

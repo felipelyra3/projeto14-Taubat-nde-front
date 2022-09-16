@@ -6,54 +6,54 @@ import { useNavigate } from "react-router-dom"
 
 export default function Configuser() {
 
-    const [email, setEmail] = useState("")
-    const [senha, setSenha] = useState("")
-    const [nome, setNome] = useState("")
-    const [avatar, setAvatar] = useState("")
-    const img_user = localStorage.getItem("avatar")
+  const [email, setEmail] = useState("")
+  const [senha, setSenha] = useState("")
+  const [nome, setNome] = useState("")
+  const [avatar, setAvatar] = useState("")
+  const img_user = localStorage.getItem("avatar")
 
-    let navigate = useNavigate()
+  let navigate = useNavigate()
 
 
-    async function fazerCadastro(event) {
-        event.preventDefault();
-  
-          try{
-            const requisicao = await axios.put("http://localhost:5000/", {
-                  email: email,
-                  nome: nome,
-                  senha: senha  
-            });
-            console.log(requisicao)
-            //navigate("/")
-          
-            }catch {
-                console.log("deu ruim na requisição")
-                return
-            }  
+  async function fazerCadastro(event) {
+    event.preventDefault();
+
+    try {
+      const requisicao = await axios.put("http://localhost:5000/", {
+        email: email,
+        nome: nome,
+        senha: senha
+      });
+      console.log(requisicao)
+      //navigate("/")
+
+    } catch {
+      console.log("deu ruim na requisição")
+      return
     }
+  }
 
 
-    return(
-        <>
-            <Header />
-            <ConfiguserStyled img_user={img_user}>
-                <form onSubmit={fazerCadastro}>
-                  
-                  <div className="img"><img src={img_user}/></div>
-                  <input required type="email" id="campoEmail" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} /><br/>
-                  
-                  <input required type="number" id="camposenha" placeholder="senha" value={senha} onChange={e => setSenha(e.target.value)} /><br/>
-                  
-                  <input required type="text" id="campoNome" placeholder="nome" value={nome} onChange={e => setNome(e.target.value)} /><br/>
-                  
-                  <input required type="text" id="campoavatar" placeholder="Avatar" value={avatar} onChange={e => setAvatar(e.target.value)} /><br/>
+  return (
+    <>
+      <Header />
+      <ConfiguserStyled img_user={img_user}>
+        <form onSubmit={fazerCadastro}>
 
-                  <button>Atualizar</button>
-                </form>
-            </ConfiguserStyled>
-        </>
-    )
+          <div className="img"><img src={img_user} /></div>
+          <input required type="email" id="campoEmail" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} /><br />
+
+          <input required type="number" id="camposenha" placeholder="senha" value={senha} onChange={e => setSenha(e.target.value)} /><br />
+
+          <input required type="text" id="campoNome" placeholder="nome" value={nome} onChange={e => setNome(e.target.value)} /><br />
+
+          <input required type="text" id="campoavatar" placeholder="Avatar" value={avatar} onChange={e => setAvatar(e.target.value)} /><br />
+
+          <button>Atualizar</button>
+        </form>
+      </ConfiguserStyled>
+    </>
+  )
 }
 
 const ConfiguserStyled = styled.div`
@@ -70,7 +70,6 @@ const ConfiguserStyled = styled.div`
     height: 120px;
     border-radius: 50%;
     margin: 40px 0 20px 0;
-    background-color: red;
   }
 
   .img img {

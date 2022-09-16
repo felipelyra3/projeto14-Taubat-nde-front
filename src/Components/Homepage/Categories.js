@@ -5,26 +5,26 @@ import barrigaplastico from "../../Assets/3Plástico.png"
 import barrigagel from "../../Assets/4Gel.png"
 
 
-export default function Categories(){
-    
-    return(
+export default function Categories() {
+
+    return (
         <CategoriesStyled>
             <h2>Categorias</h2>
             <div className="container">
                 <div className="coluna-esquerda">
                     <div className="linha1">
-                        <img src={barrigapano}/>
+                        <img src={barrigapano} />
                     </div>
                     <div className="linha2">
-                        <img src={barrigalatex}/>
+                        <img src={barrigalatex} />
                     </div>
                 </div>
                 <div className="coluna-direita">
                     <div className="linha3">
-                        <img src={barrigagel}/>
+                        <img src={barrigagel} />
                     </div>
-                    <div className="linha4">                        
-                        <img src={barrigaplastico}/>
+                    <div className="linha4">
+                        <img src={barrigaplastico} />
                     </div>
                 </div>
             </div>
@@ -51,6 +51,9 @@ const CategoriesStyled = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto;
         
     }
 

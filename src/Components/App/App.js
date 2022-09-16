@@ -11,6 +11,7 @@ import Fabric from "../Categories/Fabric";
 import Plastic from "../Categories/Plastic";
 import Gel from "../Categories/Gel";
 import Latex from "../Categories/Latex";
+import Cart from "../Cart/Cart";
 
 export default function App() {
     const [userInfo, setUserInfo] = useState({});
@@ -19,10 +20,13 @@ export default function App() {
     const getMaisVendidos = "http://localhost:5000/maisvendidos"
     const getProducts = "http://localhost:5000/products";
     const postAddCart = "http://localhost:5000/addcart";
+    const getGetCart = "http://localhost:5000/getcart";
+    const deleteRemoveFromCart = "http://localhost:5000/removefromcart";
+    const deleteEmptyCart = "http://localhost:5000/emptycart";
 
     return (
         <>
-            <UserContext.Provider value={{getMaisVendidos, userInfo, setUserInfo, postSignUp, postLogin, getProducts, postAddCart }}>
+            <UserContext.Provider value={{ getMaisVendidos, userInfo, setUserInfo, postSignUp, postLogin, getProducts, postAddCart, getGetCart, deleteRemoveFromCart, deleteEmptyCart }}>
                 <GlobalStyle />
                 <BrowserRouter>
                     <Routes>
@@ -34,6 +38,7 @@ export default function App() {
                         <Route path="/plastic" element={<Plastic />} />
                         <Route path="/gel" element={<Gel />} />
                         <Route path="/latex" element={<Latex />} />
+                        <Route path="/cart" element={<Cart />} />
                     </Routes>
                 </BrowserRouter>
             </UserContext.Provider>
