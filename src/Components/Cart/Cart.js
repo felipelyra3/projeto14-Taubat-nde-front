@@ -6,7 +6,7 @@ import axios from "axios";
 import Footer from "../Homepage/Footer";
 import Header from "../Homepage/Header";
 
-function ProductsJSX({ name, description, image, price, id, navigate, deleteRemoveFromCart, setProducts, setLoading }) {
+function ProductsJSX({ name, description, image, price, id, navigate, deleteRemoveFromCart, getGetCart, setProducts, setLoading }) {
     return (
         <Product>
             <div className="image"><img src={image} alt="Plastic" /></div>
@@ -14,13 +14,13 @@ function ProductsJSX({ name, description, image, price, id, navigate, deleteRemo
                 <h1>{name}</h1>
                 <h2>{description}</h2>
                 <h3>{price}</h3>
-                <h4 onClick={() => RemoveFromCart(id, navigate, deleteRemoveFromCart, setProducts, setLoading)}>Remover do carrinho</h4>
+                <h4 onClick={() => RemoveFromCart(id, navigate, deleteRemoveFromCart, getGetCart, setProducts, setLoading)}>Remover do carrinho</h4>
             </div>
         </Product>
     );
 };
 
-function RemoveFromCart(id, navigate, deleteRemoveFromCart, setProducts, setLoading) {
+function RemoveFromCart(id, navigate, deleteRemoveFromCart, getGetCart, setProducts, setLoading) {
     const token = localStorage.getItem("token");
     console.log(token);
     if (Object.keys(token).length === 0) {
@@ -38,7 +38,7 @@ function RemoveFromCart(id, navigate, deleteRemoveFromCart, setProducts, setLoad
 
         const del = axios.post(deleteRemoveFromCart, body, config);
         del.then(() => {
-            const get = axios.get("http://localhost:5000/getcart", config);
+            const get = axios.get(getGetCart, config);
 
             get.then((answer) => {
                 setProducts(answer.data.cart);
@@ -61,7 +61,11 @@ function RemoveFromCart(id, navigate, deleteRemoveFromCart, setProducts, setLoad
 export default function Cart() {
     const [products, setProducts] = useState({});
     const [isLoading, setLoading] = useState(true);
-    const [paymentMethod, setPaymentMethod] = useState();
+    const [cardName, setCardName] = useState('');
+    const [cardNumber, setCardNumber] = useState('');
+    const [cardSecureCode, setCardSecureCode] = useState('');
+    const [totalPurchase, setTotalPurchase] = useState(() => 0 + 0);
+    //const [paymentMethod, setPaymentMethod] = useState();
     const context = useContext(UserContext);
     const navigate = useNavigate();
 
@@ -87,7 +91,20 @@ export default function Cart() {
         get.catch((error) => {
             console.log(error);
         });
+
+
+
     }, []);
+
+    let total = 0;
+    for (let i = 0; i < products.length; i++) {
+        total = total + products[i].price;
+    }
+
+    useEffect(() => {
+        setTotalPurchase(total);
+    }, [products]);
+
 
     if (isLoading) {
         return <div className="App">Loading...</div>;
@@ -117,20 +134,26 @@ export default function Cart() {
             navigate('/');
         }
 
+        const body = {
+            cardName,
+            cardNumber,
+            cardSecureCode,
+            totalPurchase
+        };
+
         const config = {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         };
 
-        console.log(config);
-
-        const post = axios.post(context.deleteEmptyCart, { id: 0 }, config);
+        const post = axios.post(context.deleteEmptyCart, body, config);
 
         post.then((answer) => {
             setProducts(answer.data.cart);
             setLoading(false);
             alert('Compra finalizada com sucesso');
+            navigate('/homepage');
         });
 
         post.catch((error) => {
@@ -139,18 +162,24 @@ export default function Cart() {
         });
     }
 
+
     return (
         <>
             <Header />
             <Page>
                 <ContainerProducts>
-                    {products.map((product, key) => <ProductsJSX key={key} name={product.name} description={product.description} image={product.image} price={product.price} id={product._id} navigate={navigate} deleteRemoveFromCart={context.deleteRemoveFromCart} setProducts={setProducts} setLoading={setLoading} />)}
+                    {products.map((product, key) => <ProductsJSX key={key} name={product.name} description={product.description} image={product.image} price={product.price} id={product._id} navigate={navigate} deleteRemoveFromCart={context.deleteRemoveFromCart} getGetCart={context.getGetCart} setProducts={setProducts} setLoading={setLoading} />)}
                 </ContainerProducts>
 
                 <Product>
                     <Form onSubmit={handleForm}>
                         <h1>Finalizar Compra</h1>
-                        <h2>Forma de pagamento:</h2>
+                        <h2>Total da compra: {totalPurchase}</h2>
+
+                        <input type="text" id="cardname" placeholder="Nome no cartão de crédito" value={cardName} onChange={(e) => { setCardName(e.target.value) }} required></input>
+                        <input type="text" id="cardnumber" placeholder="Número do cartão de crédito" value={cardNumber} onChange={(e) => { setCardNumber(e.target.value) }} required></input>
+                        <input type="text" id="cardsecurecode" placeholder="Número de segurança do cartão de crédito" value={cardSecureCode} onChange={(e) => { setCardSecureCode(e.target.value) }} required></input>
+                        {/* <h2>Forma de pagamento:</h2>
                         <Radio>
                             <label><input type='radio' name="pix" value="Pix" onChange={e => setPaymentMethod(e.target.value)} />Pix</label>
                             <label><input type='radio' name="credit" value="Credit" onChange={e => setPaymentMethod(e.target.value)} />Crédito</label>
@@ -158,7 +187,7 @@ export default function Cart() {
                         </Radio>
 
                         {paymentMethod === 'Pix' ? <p><input type="text" id="pixreceipt" placeholder="Comprovante de pix" required></input></p> : <></>}
-                        {paymentMethod === 'Debit' || paymentMethod === 'Credit' ? <><p><input type="text" id="cardname" placeholder="Nome no cartão" required></input></p><p><input type="text" id="cardnumber" placeholder="Número do Cartão" required></input></p><p><input type="text" id="securecode" placeholder="Código de Segurança" required></input></p></> : <></>}
+                        {paymentMethod === 'Debit' || paymentMethod === 'Credit' ? <><p><input type="text" id="cardname" placeholder="Nome no cartão" required></input></p><p><input type="text" id="cardnumber" placeholder="Número do Cartão" required></input></p><p><input type="text" id="securecode" placeholder="Código de Segurança" required></input></p></> : <></>} */}
 
                         <Button>Finalizar Compra</Button>
                     </Form>
@@ -224,9 +253,15 @@ const Form = styled.form`
     p {
         margin-top: 12px;
     }
+    input {
+        height: 24px;
+        margin-top: 4px;
+        border: none;
+        border-radius: 4px;
+    }
 `;
 
-const Radio = styled.div``;
+/* const Radio = styled.div``; */
 
 const Button = styled.button`
     display: flex;

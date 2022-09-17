@@ -3,6 +3,7 @@ import barrigapano from "../../Assets/barriga-de-pano.png"
 import barrigalatex from "../../Assets/2Latex.png"
 import barrigaplastico from "../../Assets/3Plástico.png"
 import barrigagel from "../../Assets/4Gel.png"
+import { Link } from "react-router-dom";
 
 
 export default function Categories() {
@@ -13,18 +14,18 @@ export default function Categories() {
             <div className="container">
                 <div className="coluna-esquerda">
                     <div className="linha1">
-                        <img src={barrigapano} />
+                        <Link to={'/fabric'}><img src={barrigapano} alt="fabric" /></Link>
                     </div>
                     <div className="linha2">
-                        <img src={barrigalatex} />
+                        <Link to={'/latex'}><img src={barrigalatex} alt="latex" /></Link>
                     </div>
                 </div>
                 <div className="coluna-direita">
                     <div className="linha3">
-                        <img src={barrigagel} />
+                        <Link to={'/gel'}><img src={barrigagel} alt="gel" /></Link>
                     </div>
                     <div className="linha4">
-                        <img src={barrigaplastico} />
+                        <Link to={'/plastic'}><img src={barrigaplastico} alt="plastic" /></Link>
                     </div>
                 </div>
             </div>
