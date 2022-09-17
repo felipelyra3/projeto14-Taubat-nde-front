@@ -202,6 +202,7 @@ const Page = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 100px;
+    background: #f706b6;
 `;
 
 const ContainerProducts = styled.div`

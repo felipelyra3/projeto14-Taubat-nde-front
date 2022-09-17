@@ -5,6 +5,7 @@ import UserContext from "../Contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 import Header from "../Homepage/Header";
 import Footer from "../Homepage/Footer";
+import iconecart from "../../Assets/adicionar-ao-carrinho.png"
 
 function ProductsJSX({ name, description, image, price, id, navigate, postAddCart }) {
     return (
@@ -14,8 +15,8 @@ function ProductsJSX({ name, description, image, price, id, navigate, postAddCar
                 <h1>{name}</h1>
                 <h2>{description}</h2>
                 <h3>{price}</h3>
-                <h4 onClick={() => AddCart(id, navigate, postAddCart)}>Adicionar ao carrinho</h4>
             </div>
+            <img className="iconecart" onClick={() => AddCart(id, navigate, postAddCart)} src={iconecart} />
         </Product>
     );
 }
@@ -94,6 +95,7 @@ const Page = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 100px;
+    background: #f706b6;
 `;
 
 const ContainerProducts = styled.div`
@@ -107,7 +109,7 @@ const Product = styled.div`
     background-color: #F1F1F1;
     padding: 12px;
     border-radius: 10px;
-
+    background: #f706b6;
     img {
         height: 300px;
         width: 200px;
