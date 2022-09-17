@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Footer from "../Homepage/Footer";
 import Header from "../Homepage/Header";
+import iconecart from "../../Assets/remover-do-carrinho.png"
 
 function ProductsJSX({ name, description, image, price, id, navigate, deleteRemoveFromCart, getGetCart, setProducts, setLoading }) {
     return (
@@ -13,9 +14,9 @@ function ProductsJSX({ name, description, image, price, id, navigate, deleteRemo
             <div className="information">
                 <h1>{name}</h1>
                 <h2>{description}</h2>
-                <h3>{price}</h3>
-                <h4 onClick={() => RemoveFromCart(id, navigate, deleteRemoveFromCart, getGetCart, setProducts, setLoading)}>Remover do carrinho</h4>
+                <h3>R$ {price}</h3>
             </div>
+            <img className="iconecart" onClick={() => RemoveFromCart(id, navigate, deleteRemoveFromCart, getGetCart, setProducts, setLoading)} src={iconecart}/>
         </Product>
     );
 };
@@ -174,11 +175,11 @@ export default function Cart() {
                 <Product>
                     <Form onSubmit={handleForm}>
                         <h1>Finalizar Compra</h1>
-                        <h2>Total da compra: {totalPurchase}</h2>
+                       
 
                         <input type="text" id="cardname" placeholder="Nome no cartão de crédito" value={cardName} onChange={(e) => { setCardName(e.target.value) }} required></input>
-                        <input type="text" id="cardnumber" placeholder="Número do cartão de crédito" value={cardNumber} onChange={(e) => { setCardNumber(e.target.value) }} required></input>
-                        <input type="text" id="cardsecurecode" placeholder="Número de segurança do cartão de crédito" value={cardSecureCode} onChange={(e) => { setCardSecureCode(e.target.value) }} required></input>
+                        <input type="number" id="cardnumber" placeholder="Número do cartão de crédito" value={cardNumber} onChange={(e) => { setCardNumber(e.target.value) }} required></input>
+                        <input type="text" id="cardsecurecode" placeholder="Número de segurança do cartão" value={cardSecureCode} onChange={(e) => { setCardSecureCode(e.target.value) }} required></input>
                         {/* <h2>Forma de pagamento:</h2>
                         <Radio>
                             <label><input type='radio' name="pix" value="Pix" onChange={e => setPaymentMethod(e.target.value)} />Pix</label>
@@ -188,7 +189,7 @@ export default function Cart() {
 
                         {paymentMethod === 'Pix' ? <p><input type="text" id="pixreceipt" placeholder="Comprovante de pix" required></input></p> : <></>}
                         {paymentMethod === 'Debit' || paymentMethod === 'Credit' ? <><p><input type="text" id="cardname" placeholder="Nome no cartão" required></input></p><p><input type="text" id="cardnumber" placeholder="Número do Cartão" required></input></p><p><input type="text" id="securecode" placeholder="Código de Segurança" required></input></p></> : <></>} */}
-
+                         <h2>Total da compra: R$ {totalPurchase}</h2>
                         <Button>Finalizar Compra</Button>
                     </Form>
                 </Product>
@@ -201,24 +202,33 @@ export default function Cart() {
 const Page = styled.div`
     display: flex;
     justify-content: center;
-    margin-top: 100px;
+    margin-top: 80px;
+    background: #f706b6;
+    min-height: 100vh;
+    //height: 100vh;
 `;
 
 const ContainerProducts = styled.div`
-    margin: 24px;
     width: 100vh;
 `;
 
 const Product = styled.div`
     display: flex;
     margin-bottom: 24px;
-    background-color: #F1F1F1;
+    background-color: #383838;
     padding: 12px;
     border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
+    max-width: 620px;
+    max-height: 400px;
+    margin-top: 50px;
 
     img {
-        height: 300px;
+        height: 200px;
         width: 200px;
+        margin-right: 20px;
+        margin-top: 15px;
+        
     }
 
     h1 {
@@ -226,20 +236,30 @@ const Product = styled.div`
         font-size: 28px;
         font-weight: 700;
         color: #9C9E9D;
+        line-height: 40px;
     }
     
     h2 {
-        margin: 6px;
+        margin: 10px;
         font-size: 18px;
         font-weight: 700;
-        color: #191816;
+        color: white;
+        line-height: 25px;
     }
 
     h3 {
-        margin: 50px 6px 6px 6px;
+        margin: 30px 6px 6px 6px;
         font-size: 24px;
         font-weight: 700;
-        color: #191816;
+        color: white;
+    }
+
+    .iconecart {
+        width: 42px;
+        height: 42px;
+        align-self: flex-end;
+        margin: 10px;
+        cursor: pointer;
     }
 `;
 
@@ -247,17 +267,36 @@ const Form = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
+    
+
     h1 {
-        margin-bottom: 24px;
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        font-size: 19px;
     }
     p {
         margin-top: 12px;
     }
-    input {
-        height: 24px;
-        margin-top: 4px;
+
+    input[type=text], input[type=number] {
+        height: 40px;
+        width: 100%;
+        max-width: 200px;
+        margin-bottom: 15px;
         border: none;
         border-radius: 4px;
+        outline: none;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    input[type="number"] {
+        -moz-appearance: textfield;
     }
 `;
 
@@ -269,17 +308,18 @@ const Button = styled.button`
     align-items: center;
     width: 200px;
     height: 46px;
-    background: #FFFFFF;
+    background: #fa7cd9;
     border-radius: 5px;
     border: none;
-    margin-top: 24px;
+    margin-top: 15px;
+    cursor: pointer;
 
-    font-family: 'Raleway', sans-serif;
+
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
     line-height: 23px;
-    color: #A9ACB1;
+    color: white;
     margin-bottom: 24px;
 `;
 
@@ -293,6 +333,7 @@ const EmptyCart = styled.div`
     padding: 12px;
     border-radius: 10px;
     height: 80vh;
+    margin-top: 25px;
 
     img {
         margin-top: 24px;

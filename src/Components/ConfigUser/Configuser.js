@@ -85,7 +85,7 @@ const ConfiguserStyled = styled.div`
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    margin: 40px 0 20px 0;
+    margin: 30% 0 20px 0;
   }
 
   .img img {

@@ -5,6 +5,7 @@ import UserContext from "../Contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 import Header from "../Homepage/Header";
 import Footer from "../Homepage/Footer";
+import iconecart from "../../Assets/adicionar-ao-carrinho.png"
 
 function ProductsJSX({ name, description, image, price, id, navigate, postAddCart }) {
     return (
@@ -13,9 +14,9 @@ function ProductsJSX({ name, description, image, price, id, navigate, postAddCar
             <div className="information">
                 <h1>{name}</h1>
                 <h2>{description}</h2>
-                <h3>{price}</h3>
-                <h4 onClick={() => AddCart(id, navigate, postAddCart)}>Adicionar ao carrinho</h4>
+                <h3>R$ {price}</h3>
             </div>
+            <img className="iconecart" onClick={() => AddCart(id, navigate, postAddCart)} src={iconecart} />
         </Product>
     );
 }
@@ -93,7 +94,9 @@ export default function Fabric() {
 const Page = styled.div`
     display: flex;
     justify-content: center;
-    margin-top: 100px;
+    margin-top: 80px;
+    background: #f706b6;
+    min-height: 100vh;
 `;
 
 const ContainerProducts = styled.div`
@@ -104,18 +107,20 @@ const ContainerProducts = styled.div`
 const Product = styled.div`
     display: flex;
     margin-bottom: 24px;
-    background-color: #F1F1F1;
+    background: #383838;
     padding: 12px;
     border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
 
     img {
-        height: 300px;
+        height: 200px;
         width: 200px;
+        margin-right: 20px;
     }
 
     h1 {
         margin: 6px;
-        font-size: 28px;
+        font-size: 25px;
         font-weight: 700;
         color: #9C9E9D;
     }
@@ -124,13 +129,23 @@ const Product = styled.div`
         margin: 6px;
         font-size: 18px;
         font-weight: 700;
-        color: #191816;
+        color: white;
+        
     }
 
     h3 {
         margin: 50px 6px 6px 6px;
         font-size: 24px;
         font-weight: 700;
-        color: #191816;
+        color: white;
+    }
+
+    .iconecart {
+        width: 42px;
+        height: 42px;
+        align-self: flex-end;
+        margin: 20px;
+        cursor: pointer;
     }
 `;
+
