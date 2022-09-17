@@ -28,7 +28,7 @@ export default function SignUp() {
         };
 
         console.log(context.postSignUp);
-        const post = axios.post('http://localhost:5000/signup', body);
+        const post = axios.post(context.postSignUp, body);
 
         post.then(() => {
             alert('Conta criada com sucesso!');
