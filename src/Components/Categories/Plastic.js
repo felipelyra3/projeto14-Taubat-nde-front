@@ -94,7 +94,7 @@ const Page = styled.div`
     justify-content: center;
     margin-top: 80px;
     background: #f706b6;
-    height: 100vh;
+    min-height: 100vh;
 `;
 
 const ContainerProducts = styled.div`
