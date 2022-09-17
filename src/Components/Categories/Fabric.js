@@ -106,10 +106,10 @@ const ContainerProducts = styled.div`
 const Product = styled.div`
     display: flex;
     margin-bottom: 24px;
-    background-color: #F1F1F1;
+    background: #383838;
     padding: 12px;
     border-radius: 10px;
-    background: #f706b6;
+
     img {
         height: 300px;
         width: 200px;
@@ -136,3 +136,4 @@ const Product = styled.div`
         color: #191816;
     }
 `;
+
