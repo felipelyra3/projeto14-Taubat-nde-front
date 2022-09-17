@@ -18,5 +18,6 @@ export default function Homepage() {
 }
 
 const HomePageStyled = styled.div`
-    background-color: #ECECEC; //#feabda
+    background-color: #f706b6;
+   //background-color: #ECECEC; //#feabda
 `

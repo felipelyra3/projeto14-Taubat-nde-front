@@ -23,10 +23,11 @@ export default function App() {
     const getGetCart = "http://localhost:5000/getcart";
     const deleteRemoveFromCart = "http://localhost:5000/removefromcart";
     const deleteEmptyCart = "http://localhost:5000/emptycart";
+    const logout = "http://localhost:5000/logout";
 
     return (
         <>
-            <UserContext.Provider value={{ getMaisVendidos, userInfo, setUserInfo, postSignUp, postLogin, getProducts, postAddCart, getGetCart, deleteRemoveFromCart, deleteEmptyCart }}>
+            <UserContext.Provider value={{logout, getMaisVendidos, userInfo, setUserInfo, postSignUp, postLogin, getProducts, postAddCart, getGetCart, deleteRemoveFromCart, deleteEmptyCart }}>
                 <GlobalStyle />
                 <BrowserRouter>
                     <Routes>

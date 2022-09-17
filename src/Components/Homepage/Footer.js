@@ -27,7 +27,7 @@ const FooterStyle = styled.div`
     //margin-top: 30px;
     height: 70px;
     background-color: #f70071;
-
+    
     //background-color: #1f1f1f;
 
     > img{

@@ -2,11 +2,57 @@ import { useNavigate, Link } from "react-router-dom";
 import styled from "styled-components"
 import logo from "../../Assets/logo.png"
 import sacola from "../../Assets/sacola.png"
-//import usuarioicon from "../../Assets/usuario-icon.png"
+import logouticon from "../../Assets/logout.png"
+import axios from "axios";
+import {useContext, useEffect, useState } from "react";
+import UserContext from "../Contexts/UserContext";
+
 
 export default function Header() {
     let navigate = useNavigate()
-    const usuarioicon = localStorage.getItem("avatar")
+    const [avatar, setAvatar] = useState("")
+     const context = useContext(UserContext);
+
+     async function getAvatar(){
+         try {
+             const request = await axios.get(context.getMaisVendidos, {
+                 headers: {
+                     Authorization: `Bearer ${localStorage.getItem("token")}`
+                 }
+             })
+             setAvatar(request.data.usuario.avatar)
+             localStorage.setItem("avatar", request.data.usuario.avatar)
+         } catch (error) {
+             console.log(error)
+         }
+     }
+
+     
+     useEffect(() => {
+	 	getAvatar()
+	 }, [avatar])
+     
+    async function Deslogar(){
+
+        const resp = prompt("Gostaria mesmo de deslogar ?")
+        if(resp === "Sim" || resp === "sim"){
+            
+            try {
+                await axios.delete(context.logout, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            })
+            
+            localStorage.clear();
+            navigate("/")
+            
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
+    //const usuarioicon = 
     return (
         <HeaderStyled>
             <div className="logo">
@@ -14,15 +60,16 @@ export default function Header() {
             </div>
             <div className="links">
                 <ul>
-                    <Link to={'/fabric'}><li>Pano</li></Link>
-                    <Link to={'/latex'}><li>Latex</li></Link>
-                    <Link to={'/plastic'}><li>Plástico</li></Link>
-                    <Link to={'/gel'}><li>Gel</li></Link>
+                    <li onClick={() => navigate("/fabric")}>Pano</li>
+                    <li onClick={() => navigate("/latex")}>Latex</li>
+                    <li onClick={() => navigate("/plastic")}>Plástico</li>
+                    <li onClick={() => navigate("/gel")}>Gel</li>
                 </ul>
             </div>
             <div className="area_usuario">
-                <Link to={'/cart'}><img src={sacola} alt="Cart" /></Link>
-                <div className="iconuser"><img onClick={() => { navigate("/configuser") }} src={usuarioicon} alt="Taubatende" /></div>
+                <img onClick={() => navigate("/cart")} src={sacola} alt="Cart" />
+                <div className="iconuser"><img onClick={() => { navigate("/configuser") }} src={localStorage.getItem("avatar")} alt="Taubatende" /></div>
+                <img onClick={() => {Deslogar()}} src={logouticon}/>
             </div>
         </HeaderStyled>
     )
@@ -65,22 +112,25 @@ const HeaderStyled = styled.div`
         gap: 30px;
     }
     .area_usuario img {
-        width: 32px;
-        height: 32px;
+        width: 38px;
+        height: 38px;
         cursor: pointer;
     }
 
     .iconuser {
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-  }
-
-  .iconuser img {
-    height: 100%;
-    width: 100%;
-    border-radius: 50%;
-    object-fit: fill;
+        display: flex; 
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+    
+    .iconuser img {
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+        object-fit: fill;
   }
 `

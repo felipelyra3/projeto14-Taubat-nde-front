@@ -59,7 +59,7 @@ const Page = styled.div`
     align-items: center;
     flex-direction: column;
     height: 100vh;
-    background-color: #EBF1EF;
+    background-color: #f706b6;
 
     img {
         width: 290px;
@@ -89,7 +89,7 @@ const Form = styled.form`
         border-radius: 5px;
         border: none;
         
-        font-family: 'Raleway', sans-serif;
+        font-family: 'Roboto', sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 20px;
@@ -97,6 +97,7 @@ const Form = styled.form`
         color: #000000;
         margin-bottom: 15px;
         padding-left: 15px;
+        outline: none;
     }
 `;
 
@@ -106,32 +107,33 @@ const Button = styled.button`
     align-items: center;
     width: 326px;
     height: 46px;
-    background: #EBF1EF;
+    background: #fa7cd9;
     border-radius: 5px;
     border: none;
+    cursor: pointer;
 
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
     line-height: 23px;
-    color: #A9ACB1;
+    color: white;
     margin-bottom: 24px;
 `;
 
 const StyledLink = styled(Link)`
     text-decoration: none;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 17px;
     line-height: 18px;
-    color: #A9ACB1;
+    color: #f706b6;
 `;
 
 const Error = styled.span`
     text-decoration: none;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: 15px;

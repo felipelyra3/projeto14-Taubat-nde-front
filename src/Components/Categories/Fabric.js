@@ -14,7 +14,7 @@ function ProductsJSX({ name, description, image, price, id, navigate, postAddCar
             <div className="information">
                 <h1>{name}</h1>
                 <h2>{description}</h2>
-                <h3>{price}</h3>
+                <h3>R$ {price}</h3>
             </div>
             <img className="iconecart" onClick={() => AddCart(id, navigate, postAddCart)} src={iconecart} />
         </Product>
@@ -94,8 +94,9 @@ export default function Fabric() {
 const Page = styled.div`
     display: flex;
     justify-content: center;
-    margin-top: 100px;
+    margin-top: 80px;
     background: #f706b6;
+    height: 100vh;
 `;
 
 const ContainerProducts = styled.div`
@@ -109,15 +110,17 @@ const Product = styled.div`
     background: #383838;
     padding: 12px;
     border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
 
     img {
-        height: 300px;
+        height: 200px;
         width: 200px;
+        margin-right: 20px;
     }
 
     h1 {
         margin: 6px;
-        font-size: 28px;
+        font-size: 25px;
         font-weight: 700;
         color: #9C9E9D;
     }
@@ -126,14 +129,23 @@ const Product = styled.div`
         margin: 6px;
         font-size: 18px;
         font-weight: 700;
-        color: #191816;
+        color: white;
+        
     }
 
     h3 {
         margin: 50px 6px 6px 6px;
         font-size: 24px;
         font-weight: 700;
-        color: #191816;
+        color: white;
+    }
+
+    .iconecart {
+        width: 42px;
+        height: 42px;
+        align-self: flex-end;
+        margin: 20px;
+        cursor: pointer;
     }
 `;
 
