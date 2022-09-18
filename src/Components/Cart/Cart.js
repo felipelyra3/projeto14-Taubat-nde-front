@@ -152,6 +152,7 @@ export default function Cart() {
 
         post.then((answer) => {
             setProducts(answer.data.cart);
+            console.log(answer.data.cart)
             setLoading(false);
             alert('Compra finalizada com sucesso');
             navigate('/homepage');
@@ -162,7 +163,6 @@ export default function Cart() {
             alert('Erro');
         });
     }
-
 
     return (
         <>
