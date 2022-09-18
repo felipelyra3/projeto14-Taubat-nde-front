@@ -11,7 +11,7 @@ export default function Login() {
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const context = useContext(UserContext);
-
+    localStorage.removeItem("token")
     function handleForm(e) {
         e.preventDefault();
         const body = {
