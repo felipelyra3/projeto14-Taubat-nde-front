@@ -4,53 +4,93 @@ import logo from "../../Assets/logo.png"
 import sacola from "../../Assets/sacola.png"
 import logouticon from "../../Assets/logout.png"
 import axios from "axios";
-import {useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import UserContext from "../Contexts/UserContext";
 
 
 export default function Header() {
     let navigate = useNavigate()
-    const [avatar, setAvatar] = useState("")
-     const context = useContext(UserContext);
+    const [avatar, setAvatar] = useState("");
+    const [bestSellers, setBestSellers] = useState({});
+    const context = useContext(UserContext);
 
-     async function getAvatar(){
-         try {
-             const request = await axios.get(context.getMaisVendidos, {
-                 headers: {
-                     Authorization: `Bearer ${localStorage.getItem("token")}`
-                 }
-             })
-             setAvatar(request.data.usuario.avatar)
-             localStorage.setItem("avatar", request.data.usuario.avatar)
-         } catch (error) {
-             console.log(error)
-         }
-     }
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (Object.keys(token).length === 0) {
+            navigate('/');
+        }
 
-     
-     useEffect(() => {
-	 	getAvatar()
-	 }, [avatar])
-     
-    async function Deslogar(){
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        };
 
-        const resp = prompt("Gostaria mesmo de deslogar ?")
-        if(resp === "Sim" || resp === "sim"){
-            
-            try {
-                await axios.delete(context.logout, {
+        const get = axios.get(context.getMaisVendidos, config);
+
+        get.then((answer) => {
+            setBestSellers(answer.data);
+            setAvatar(answer.data.usuario.avatar);
+            localStorage.setItem("avatar", answer.data.usuario.avatar);
+            console.log(avatar);
+        });
+
+        get.catch((error) => {
+            console.log(error);
+        });
+
+    }, [avatar]);
+
+    /* useEffect(() => {
+        localStorage.setItem("avatar", bestSellers.usuario.avatar);
+    }, [bestSellers]); */
+
+    console.log(avatar);
+    //localStorage.setItem("avatar", bestSellers.usuario.avatar);
+
+
+    /* useEffect(() => {
+        setAvatar(bestSellers.usuario.avatar);
+    }, [bestSellers]); */
+
+    /* async function getAvatar(){
+        try {
+            const request = await axios.get(context.getMaisVendidos, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             })
-            
+            setAvatar(request.data.usuario.avatar)
+            localStorage.setItem("avatar", request.data.usuario.avatar)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    
+    useEffect(() => {
+         getAvatar()
+    }, [avatar]); */
+
+    async function Deslogar() {
+
+        /* const resp = prompt("Gostaria mesmo de deslogar ?")
+        if (resp === "Sim" || resp === "sim") { */
+
+        try {
+            await axios.delete(context.logout, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            })
+
             localStorage.clear();
             navigate("/")
-            
-            } catch (error) {
-                console.log(error)
-            }
+
+        } catch (error) {
+            console.log(error)
         }
+        //}
     }
     //const usuarioicon = 
     return (
@@ -69,7 +109,7 @@ export default function Header() {
             <div className="area_usuario">
                 <img onClick={() => navigate("/cart")} src={sacola} alt="Cart" />
                 <div className="iconuser"><img onClick={() => { navigate("/configuser") }} src={localStorage.getItem("avatar")} alt="Taubatende" /></div>
-                <img onClick={() => {Deslogar()}} src={logouticon}/>
+                <img onClick={() => { Deslogar() }} src={logouticon} />
             </div>
         </HeaderStyled>
     )
