@@ -74,23 +74,23 @@ export default function Header() {
 
     async function Deslogar() {
 
-        const resp = prompt("Gostaria mesmo de deslogar ?")
-        if (resp === "Sim" || resp === "sim") {
+        /* const resp = prompt("Gostaria mesmo de deslogar ?")
+        if (resp === "Sim" || resp === "sim") { */
 
-            try {
-                await axios.delete(context.logout, {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`
-                    }
-                })
+        try {
+            await axios.delete(context.logout, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            })
 
-                localStorage.clear();
-                navigate("/")
+            localStorage.clear();
+            navigate("/")
 
-            } catch (error) {
-                console.log(error)
-            }
+        } catch (error) {
+            console.log(error)
         }
+        //}
     }
     //const usuarioicon = 
     return (
