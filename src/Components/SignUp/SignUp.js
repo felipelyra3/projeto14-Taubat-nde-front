@@ -66,7 +66,8 @@ const Page = styled.div`
     align-items: center;
     flex-direction: column;
     height: 100vh;
-    background-color: #EBF1EF;
+    background-color: #F706B6;
+    font-family: 'Roboto', sans-serif;
 
     img {
         width: 290px;
@@ -95,8 +96,8 @@ const Form = styled.form`
         background: #FFFFFF;
         border-radius: 5px;
         border: none;
+        outline: none;
         
-        font-family: 'Raleway', sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 20px;
@@ -113,27 +114,27 @@ const Button = styled.button`
     align-items: center;
     width: 326px;
     height: 46px;
-    background: #EBF1EF;
+    background: #fa7cd9;
     border-radius: 5px;
     border: none;
+    cursor: pointer;
 
-    font-family: 'Raleway', sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
     line-height: 23px;
-    color: #A9ACB1;
+    color: white;
     margin-bottom: 24px;
 `;
 
 const StyledLink = styled(Link)`
     text-decoration: none;
-    font-family: 'Raleway', sans-serif;
     font-style: normal;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 17px;
     line-height: 18px;
-    color: #A9ACB1;
+    color: #F706B6;
+    
 `;
 
 const Error = styled.span`
