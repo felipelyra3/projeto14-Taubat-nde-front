@@ -27,7 +27,7 @@ export default function App() {
 
     return (
         <>
-            <UserContext.Provider value={{logout, getMaisVendidos, userInfo, setUserInfo, postSignUp, postLogin, getProducts, postAddCart, getGetCart, deleteRemoveFromCart, deleteEmptyCart }}>
+            <UserContext.Provider value={{ logout, getMaisVendidos, userInfo, setUserInfo, postSignUp, postLogin, getProducts, postAddCart, getGetCart, deleteRemoveFromCart, deleteEmptyCart }}>
                 <GlobalStyle />
                 <BrowserRouter>
                     <Routes>

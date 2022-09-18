@@ -26,7 +26,8 @@ const FooterStyle = styled.div`
     align-items: center;
     //margin-top: 30px;
     height: 70px;
-    background-color: #f70071;
+    //background-color: #f70071;
+    background-color: #FFFFFF;
     
     //background-color: #1f1f1f;
 
@@ -38,7 +39,7 @@ const FooterStyle = styled.div`
     > p {
         font-family: 'Roboto', sans-serif;
         font-size: 16px;
-        color: white;
+        color: #f70071;
     }
 
     .redes {
