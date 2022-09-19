@@ -16,7 +16,7 @@ function ProductsJSX({ name, description, image, price, id, navigate, deleteRemo
                 <h2>{description}</h2>
                 <h3>R$ {price}</h3>
             </div>
-            <img className="iconecart" onClick={() => RemoveFromCart(id, navigate, deleteRemoveFromCart, getGetCart, setProducts, setLoading)} src={iconecart}/>
+            <img className="iconecart" onClick={() => RemoveFromCart(id, navigate, deleteRemoveFromCart, getGetCart, setProducts, setLoading)} src={iconecart} />
         </Product>
     );
 };
@@ -64,6 +64,10 @@ export default function Cart() {
     const [isLoading, setLoading] = useState(true);
     const [cardName, setCardName] = useState('');
     const [cardNumber, setCardNumber] = useState('');
+    const [address, setAddress] = useState('');
+    const [neighborhood, setNeighborhood] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
     const [cardSecureCode, setCardSecureCode] = useState('');
     const [totalPurchase, setTotalPurchase] = useState(() => 0 + 0);
     //const [paymentMethod, setPaymentMethod] = useState();
@@ -175,11 +179,15 @@ export default function Cart() {
                 <Product>
                     <Form onSubmit={handleForm}>
                         <h1>Finalizar Compra</h1>
-                       
+
 
                         <input type="text" id="cardname" placeholder="Nome no cartão de crédito" value={cardName} onChange={(e) => { setCardName(e.target.value) }} required></input>
                         <input type="number" id="cardnumber" placeholder="Número do cartão de crédito" value={cardNumber} onChange={(e) => { setCardNumber(e.target.value) }} required></input>
                         <input type="text" id="cardsecurecode" placeholder="Número de segurança do cartão" value={cardSecureCode} onChange={(e) => { setCardSecureCode(e.target.value) }} required></input>
+                        <input type="text" id="address" placeholder="Endereço" value={address} onChange={(e) => { setAddress(e.target.value) }} required></input>
+                        <input type="text" id="neighborhood" placeholder="Bairro" value={neighborhood} onChange={(e) => { setNeighborhood(e.target.value) }} required></input>
+                        <input type="text" id="city" placeholder="Cidade" value={city} onChange={(e) => { setCity(e.target.value) }} required></input>
+                        <input type="text" id="state" placeholder="Estado" value={state} onChange={(e) => { setState(e.target.value) }} required></input>
                         {/* <h2>Forma de pagamento:</h2>
                         <Radio>
                             <label><input type='radio' name="pix" value="Pix" onChange={e => setPaymentMethod(e.target.value)} />Pix</label>
@@ -189,7 +197,7 @@ export default function Cart() {
 
                         {paymentMethod === 'Pix' ? <p><input type="text" id="pixreceipt" placeholder="Comprovante de pix" required></input></p> : <></>}
                         {paymentMethod === 'Debit' || paymentMethod === 'Credit' ? <><p><input type="text" id="cardname" placeholder="Nome no cartão" required></input></p><p><input type="text" id="cardnumber" placeholder="Número do Cartão" required></input></p><p><input type="text" id="securecode" placeholder="Código de Segurança" required></input></p></> : <></>} */}
-                         <h2>Total da compra: R$ {totalPurchase}</h2>
+                        <h2>Total da compra: R$ {totalPurchase}</h2>
                         <Button>Finalizar Compra</Button>
                     </Form>
                 </Product>
