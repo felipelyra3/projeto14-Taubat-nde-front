@@ -226,6 +226,7 @@ const Page = styled.div`
 
 const ContainerProducts = styled.div`
     width: 100vh;
+    margin-right: 40px;
 `;
 
 const Product = styled.div`
