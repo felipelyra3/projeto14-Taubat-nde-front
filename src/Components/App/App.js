@@ -14,20 +14,20 @@ import Latex from "../Categories/Latex";
 import Cart from "../Cart/Cart";
 
 export default function App() {
-    const [userInfo, setUserInfo] = useState({});
-    const postSignUp = "http://localhost:5000/signup";
-    const postLogin = "http://localhost:5000/login";
-    const getMaisVendidos = "http://localhost:5000/maisvendidos"
-    const getProducts = "http://localhost:5000/products";
-    const postAddCart = "http://localhost:5000/addcart";
-    const getGetCart = "http://localhost:5000/getcart";
-    const deleteRemoveFromCart = "http://localhost:5000/removefromcart";
-    const deleteEmptyCart = "http://localhost:5000/emptycart";
-    const logout = "http://localhost:5000/logout";
+    const postSignUp = "https://taubatende-back.herokuapp.com/signup";
+    const postLogin = "https://taubatende-back.herokuapp.com/login";
+    const getMaisVendidos = "https://taubatende-back.herokuapp.com/maisvendidos"
+    const getProducts = "https://taubatende-back.herokuapp.com/products";
+    const postAddCart = "https://taubatende-back.herokuapp.com/addcart";
+    const getGetCart = "https://taubatende-back.herokuapp.com/getcart";
+    const deleteRemoveFromCart = "https://taubatende-back.herokuapp.com/removefromcart";
+    const deleteEmptyCart = "https://taubatende-back.herokuapp.com/emptycart";
+    const logout = "https://taubatende-back.herokuapp.com/logout";
+    const configUser = "https://taubatende-back.herokuapp.com/configuser";
 
     return (
         <>
-            <UserContext.Provider value={{ logout, getMaisVendidos, userInfo, setUserInfo, postSignUp, postLogin, getProducts, postAddCart, getGetCart, deleteRemoveFromCart, deleteEmptyCart }}>
+            <UserContext.Provider value={{ logout, getMaisVendidos, userInfo, setUserInfo, postSignUp, postLogin, getProducts, postAddCart, getGetCart, deleteRemoveFromCart, deleteEmptyCart, configUser }}>
                 <GlobalStyle />
                 <BrowserRouter>
                     <Routes>
