@@ -38,7 +38,6 @@ function AddCart(id, navigate, postAddCart) {
 
         const post = axios.post(postAddCart, body, config);
         post.then((answer) => {
-            console.log(answer.data)
             alert('Produto adicionado no carrinho com sucesso');
         });
 
