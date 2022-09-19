@@ -16,7 +16,7 @@ function ProductsJSX({ name, description, image, price, id, navigate, deleteRemo
                 <h2>{description}</h2>
                 <h3>R$ {price}</h3>
             </div>
-            <img className="iconecart" onClick={() => RemoveFromCart(id, navigate, deleteRemoveFromCart, getGetCart, setProducts, setLoading)} src={iconecart} />
+            <img className="iconecart" onClick={() => RemoveFromCart(id, navigate, deleteRemoveFromCart, getGetCart, setProducts, setLoading)} src={iconecart} alt="removeFromCart" />
         </Product>
     );
 };
@@ -142,7 +142,11 @@ export default function Cart() {
             cardName,
             cardNumber,
             cardSecureCode,
-            totalPurchase
+            totalPurchase,
+            address,
+            neighborhood,
+            city,
+            state
         };
 
         const config = {
@@ -155,7 +159,6 @@ export default function Cart() {
 
         post.then((answer) => {
             setProducts(answer.data.cart);
-            console.log(answer.data.cart)
             setLoading(false);
             alert('Compra finalizada com sucesso');
             navigate('/homepage');
