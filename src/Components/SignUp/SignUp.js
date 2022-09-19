@@ -27,7 +27,6 @@ export default function SignUp() {
             password
         };
 
-        console.log(context.postSignUp);
         const post = axios.post(context.postSignUp, body);
 
         post.then(() => {

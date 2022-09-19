@@ -32,7 +32,6 @@ export default function Header() {
             setBestSellers(answer.data);
             setAvatar(answer.data.usuario.avatar);
             localStorage.setItem("avatar", answer.data.usuario.avatar);
-            console.log(avatar);
         });
 
         get.catch((error) => {
@@ -45,7 +44,7 @@ export default function Header() {
         localStorage.setItem("avatar", bestSellers.usuario.avatar);
     }, [bestSellers]); */
 
-    console.log(avatar);
+    
     //localStorage.setItem("avatar", bestSellers.usuario.avatar);
 
 

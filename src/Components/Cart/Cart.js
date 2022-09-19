@@ -23,7 +23,6 @@ function ProductsJSX({ name, description, image, price, id, navigate, deleteRemo
 
 function RemoveFromCart(id, navigate, deleteRemoveFromCart, getGetCart, setProducts, setLoading) {
     const token = localStorage.getItem("token");
-    console.log(token);
     if (Object.keys(token).length === 0) {
         navigate('/');
     } else {
