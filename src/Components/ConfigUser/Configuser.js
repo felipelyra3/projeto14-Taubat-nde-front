@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import Header from "../Homepage/Header"
-import { useState } from "react"
+import { useState, useContext } from "react";
+import UserContext from "../Contexts/UserContext";
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import Footer from "../Homepage/Footer"
@@ -12,6 +13,7 @@ export default function Configuser() {
   const [nome, setNome] = useState("")
   const [avatar, setAvatar] = useState("")
   const img_user = localStorage.getItem("avatar")
+  const context = useContext(UserContext);
 
   let navigate = useNavigate()
 
@@ -20,18 +22,18 @@ export default function Configuser() {
     event.preventDefault();
 
     try {
-      await axios.put("http://localhost:5000/configuser",
-      {
-        email: email,
-        avatar: avatar,
-        name: nome,
-        password: senha
-      },
-      {
+      await axios.put(context.configUser,
+        {
+          email: email,
+          avatar: avatar,
+          name: nome,
+          password: senha
+        },
+        {
           headers: {
-              authorization: `Bearer ${localStorage.getItem("token")}`
+            authorization: `Bearer ${localStorage.getItem("token")}`
           }
-      });
+        });
       setEmail("")
       setAvatar("")
       setNome("")
@@ -67,7 +69,7 @@ export default function Configuser() {
           <button>Atualizar</button>
         </form>
       </ConfiguserStyled>
-      <Footer/>
+      <Footer />
     </>
   )
 }

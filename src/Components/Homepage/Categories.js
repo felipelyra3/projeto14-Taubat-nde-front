@@ -10,7 +10,7 @@ export default function Categories() {
 
     return (
         <CategoriesStyled>
-            <h2>Categorias</h2>
+            {/* <h2>Categorias</h2> */}
             <div className="container">
                 <div className="coluna-esquerda">
                     <div className="linha1">
@@ -35,7 +35,7 @@ export default function Categories() {
 
 
 const CategoriesStyled = styled.div`
-    margin-top: 80px;
+    margin-top: 24px;
     padding: 0 140px;
     h2{
         padding-top: 30px;
