@@ -4,43 +4,43 @@ import { useEffect } from "react"
 import { useState, useContext } from "react";
 import UserContext from "../Contexts/UserContext";
 
-export default function BestSellers(){
+export default function BestSellers() {
 
-     const [bestsellers, setBestSellers] = useState([])
-     const context = useContext(UserContext);
+    const [bestsellers, setBestSellers] = useState([])
+    const context = useContext(UserContext);
 
-     async function rendersMoreBuyers(){
-         try {
-             const request = await axios.get(context.getMaisVendidos, {
-                 headers: {
-                     Authorization: `Bearer ${localStorage.getItem("token")}`
-                 }
-             })
-             //console.log(request.data.registros)
-             setBestSellers(request.data.registros)
-         } catch (error) {
-             console.log(error)
-         }
-     }
+    async function rendersMoreBuyers() {
+        try {
+            const request = await axios.get(context.getMaisVendidos, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            })
+            //console.log(request.data.registros)
+            setBestSellers(request.data.registros)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
-     useEffect(() => {
-	 	rendersMoreBuyers()
-	 }, [])
+    useEffect(() => {
+        rendersMoreBuyers()
+    }, [])
 
-    return(
-        
+    return (
+
         <BestSellersStyled>
-            <>  
+            <>
                 <h2>Mais Vendidos</h2>
-                <>{bestsellers.length > 0 
-                ? <div className="best">{
-                    bestsellers.map((bestseller) => (
-                        <img src={bestseller.image}/>
-                    ))
-                }</div> 
-                : "Não há lista de mais vendidos"}</>
+                <>{bestsellers.length > 0
+                    ? <div className="best">{
+                        bestsellers.map((bestseller) => (
+                            <img src={bestseller.image} alt="Best Sellers" />
+                        ))
+                    }</div>
+                    : "Não há lista de mais vendidos"}</>
             </>
-        </BestSellersStyled> 
+        </BestSellersStyled>
     )
 
 }
@@ -65,8 +65,8 @@ const BestSellersStyled = styled.div`
     }
 
     img {
-        cursor: pointer;
-        width: 33.3%;
-        width: 300px;
+        //cursor: pointer;
+        height: 200px;
+        width: 200px;
     }
 `
