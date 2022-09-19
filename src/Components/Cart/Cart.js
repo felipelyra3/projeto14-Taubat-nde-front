@@ -171,7 +171,7 @@ export default function Cart() {
     }
 
     return (
-        <>
+        <Containerprin>
             <Header />
             <Page>
                 <ContainerProducts>
@@ -205,17 +205,23 @@ export default function Cart() {
                 </Product>
             </Page>
             <Footer />
-        </>
+        </Containerprin>
     );
 };
+
+const Containerprin = styled.div`
+    background: #f706b6;
+`;
 
 const Page = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 80px;
-    background: #f706b6;
+    max-width: 1000px;
+    margin: 0 auto;
     min-height: 100vh;
     //height: 100vh;
+    margin-top: 50px;
 `;
 
 const ContainerProducts = styled.div`
@@ -230,8 +236,9 @@ const Product = styled.div`
     border-radius: 10px;
     font-family: 'Roboto', sans-serif;
     max-width: 620px;
-    max-height: 400px;
+    max-height: 530px;
     margin-top: 50px;
+    
 
     img {
         height: 200px;
@@ -298,6 +305,8 @@ const Form = styled.form`
         border: none;
         border-radius: 4px;
         outline: none;
+
+        font-family: 'Roboto', sans-serif;
     }
 
     input[type="number"]::-webkit-outer-spin-button,
